@@ -2,12 +2,9 @@ const serverless = require("serverless-http");
 const express = require("express");
 const app = express();
 
-const orderServices = require("./services/order-services.js");
-
+// Products
 // Create
 app.post("/products", (req, res, next) => {
-  const message = orderServices.create();
-
   return res.status(200).json({
     message,
   });
@@ -36,9 +33,41 @@ app.get("/products", (req, res, next) => {
   });
 });
 
-app.get("/hello", (req, res, next) => {
+// Orders
+// Create 
+app.post("/orders", (req, res, next) => {
   return res.status(200).json({
     message: "Hello from path!",
+  });
+});
+
+// Find by id
+app.get("/orders/:id", (req, res, next) => {
+  return res.status(200).json({
+    message: `Order: ${id}`,
+  });
+});
+
+// Search
+app.get("/orders", (req, res, next) => {
+  const { from, to, cursor, limit, status } = req.query;
+
+  return res.status(200).json({
+    message: `Order: ${ from }, ${ to }, ${ cursor }, ${ limit }, ${ status }`,
+  });
+});
+
+// Order confirm
+app.post("/orders/:id/confirm", (req, res, next) => {
+  return res.status(200).json({
+    message: `Order: ${id}`,
+  });
+});
+
+// Order cancel
+app.post("/orders/:id/cancel", (req, res, next) => {
+  return res.status(200).json({
+    message: `Order: ${id}`,
   });
 });
 
