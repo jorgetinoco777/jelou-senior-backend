@@ -41,7 +41,7 @@ app.get("/customers", (req, res, next) => {
   const { search, cursor, limit } = req.query;
 
   return res.status(200).json({
-    message: `Customer search: ${ id }`,
+    message: `Customer search: ${ search }, ${ cursor }, ${ limit }`,
   });
 });
 
