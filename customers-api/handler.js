@@ -2,15 +2,55 @@ const serverless = require("serverless-http");
 const express = require("express");
 const app = express();
 
-app.get("/", (req, res, next) => {
+// Create
+app.post("/customers", (req, res, next) => {
   return res.status(200).json({
-    message: "Hello from root!",
+    message: "Cliend created!",
   });
 });
 
-app.get("/hello", (req, res, next) => {
+// Update
+app.put("/customers/:id", (req, res, next) => {
+  const id = req.params.id;
+  
   return res.status(200).json({
-    message: "Hello from path!",
+    message: `Customer id: ${ id }`,
+  });
+});
+
+// Delete
+app.delete("/customers/:id", (req, res, next) => {
+  const id = req.params.id;
+
+  return res.status(200).json({
+    message: `Customer id: ${ id }`,
+  });
+});
+
+// Find by id
+app.get("/customers/:id", (req, res, next) => {
+  const id = req.params.id;
+
+  return res.status(200).json({
+    message: `Customer id: ${ id }`,
+  });
+});
+
+// Search
+app.get("/customers", (req, res, next) => {
+  const { search, cursor, limit } = req.query;
+
+  return res.status(200).json({
+    message: `Customer search: ${ id }`,
+  });
+});
+
+// 
+app.get("/internal/customers/:id", (req, res, next) => {
+  const id = req.params.id;
+
+  return res.status(200).json({
+    message: `Customer search: ${ id }`,
   });
 });
 
