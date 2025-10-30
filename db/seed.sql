@@ -26,7 +26,7 @@ INSERT INTO idempotency_keys (key_id, target_type, target_id, status, response_b
 ('uuid-0001', 'payment', 5, 'FAILED', '{"error": "Insufficient funds"}', DATE_ADD(NOW(), INTERVAL 3 DAY));
 
 -- Insert datafake orders table
-INSERT INTO order (id, customer_id, total_cents, create_at, status) VALUES
+INSERT INTO orders (id, customer_id, total_cents, create_at, status) VALUES
 (1, 2, 1497, NOW(), 'CREATED')
 (2, 3, 199, NOW(), 'CONFIRMED')
 (3, 4, 1999, NOW(), 'CANCEL')

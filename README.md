@@ -1,8 +1,5 @@
 # Jelou - Prueba técnica
 
-```
-By Jorge Tinoco (jorgeluis238@hotmail.com)
-```
 
 ## 🚀 Project Execution
 
