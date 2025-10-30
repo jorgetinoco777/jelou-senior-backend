@@ -2,11 +2,9 @@
   "name": "lambda-orchestrator",
   "version": "1.0.0",
   "description": "Lambda orchestrator",
-  "main": "src/handler.js",
-  "type": "module",
   "scripts": {
     "build": "echo \"no build step\"",
-    "dev": "serverless offline --noPrependStageInUrl",
+    "dev": "serverless offline start",
     "start": "serverless deploy",
     "lint": "echo \"no lint configured\""
   },
@@ -18,7 +16,7 @@
     "serverless-http": "^3.2.0"
   },
   "devDependencies": {
-    "serverless": "^3.30.0",
+    "serverless": "^4.22.0",
     "serverless-dotenv-plugin": "^6.0.0",
     "serverless-offline": "^13.8.1"
   }

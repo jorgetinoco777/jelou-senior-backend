@@ -10,6 +10,14 @@ provider:
   # https://www.serverless.com/framework/docs/providers/aws/guide/domains
   # domain: api.example.com
 
+plugins:
+    - serverless-offline
+
+custom:
+  serverless-offline:
+    httpPort: 4001 # Or any other available port
+    lambdaPort: 4002
+
 functions:
   api:
     handler: handler.handler
