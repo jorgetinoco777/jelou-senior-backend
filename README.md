@@ -61,16 +61,9 @@ curl -X POST ${CUSTOMERS_API_URL}/auth/login   -H "Content-Type: application/jso
 
 ```json
 {
-  "success": true,
-  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
-  "user": {
-    "id": 1,
-    "email": "jelou@jelou.com"
-  }
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
 }
 ```
-
-Guarda el `token` para usarlo en los siguientes requests.
 
 ---
 
