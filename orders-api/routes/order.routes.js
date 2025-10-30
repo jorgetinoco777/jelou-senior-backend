@@ -1,51 +1,24 @@
 import { Router } from "express";
 import { BODY, PARAMS, QUERY } from "../enums/sources.enum.js";
 
+// Controllers
+import OrderController from "../controllers/order.controller.js";
+
 const router = Router();
 
 // Create
-router.post("", (req, res, next) => {
-  const data = req[BODY];
-
-  return res.status(200).json({
-    ...data,
-  });
-});
+router.post("", OrderController.create);
 
 // Find by id
-router.get("/:id", (req, res, next) => {
-  const { id } = req[PARAMS];
-
-  return res.status(200).json({
-    message: `Order: ${id}`,
-  });
-});
+router.get("/:id", OrderController.findById);
 
 // Search
-router.get("", (req, res, next) => {
-  const { from, to, cursor, limit, status } = req[QUERY];
-
-  return res.status(200).json({
-    message: `Search order: ${from}, ${to}, ${cursor}, ${limit}, ${status}`,
-  });
-});
+router.get("", OrderController.search);
 
 // Order confirm
-router.post("/:id/confirm", (req, res, next) => {
-  const { id } = req[PARAMS];
-
-  return res.status(200).json({
-    message: `confirm order: ${id}`,
-  });
-});
+router.post("/:id/confirm", OrderController.updateOrderState("CONFIRMED"));
 
 // Order cancel
-router.post("/:id/cancel", (req, res, next) => {
-  const { id } = req[PARAMS];
-
-  return res.status(200).json({
-    message: `Cancel order: ${id}`,
-  });
-});
+router.post("/:id/cancel",  OrderController.updateOrderState("CANCELED"));
 
 export default router;
