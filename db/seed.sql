@@ -13,7 +13,7 @@ INSERT INTO customers (name, email, phone, status) VALUES
 
 -- Insert datafake products table
 INSERT INTO products (sku, name, price_cents, stock) VALUES
-('SKU-001', 'Hamburguesa Clásica', 599, 50),
+('SKU-001', 'Hamburguesa Clasica', 599, 50),
 ('SKU-002', 'Papas Fritas Grandes', 299, 100),
 ('SKU-003', 'Refresco 500ml', 199, 200),
 ('SKU-004', 'Combo Familiar', 1999, 30),
