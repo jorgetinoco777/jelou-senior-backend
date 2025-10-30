@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { create, deleteCutomer, findById, put, search } from "../services/customer-service.js";
+import CustomerService from "../services/customer-service.js";
 import { BODY, PARAMS, QUERY } from "../enums/sources.js";
 import { validateSchema } from "../utils/validate.js";
 import {
@@ -15,20 +15,31 @@ const router = Router();
 router.get(
   "/:id",
   validateSchema(FindIdRequestSchema, PARAMS),
-  findById(PARAMS)
+  CustomerService.findBy(PARAMS)
 );
 
-router.post("", validateSchema(CreateRequestSchema, BODY), create(BODY));
+router.post(
+  "",
+  validateSchema(CreateRequestSchema, BODY),
+  CustomerService.create(BODY)
+);
 
-router.get("", validateSchema(SearchRequestSchema, QUERY), search(QUERY));
-
+router.get(
+  "",
+  validateSchema(SearchRequestSchema, QUERY),
+  CustomerService.search(QUERY)
+);
 
 router.delete(
   "/:id",
   validateSchema(DeleteRequestSchema, PARAMS),
-  deleteCutomer(PARAMS)
+  CustomerService.remove(PARAMS)
 );
 
-router.put("/:id", validateSchema(UpdateRequestSchema, PARAMS), put);
+router.put(
+  "/:id",
+  validateSchema(UpdateRequestSchema, PARAMS),
+  CustomerService.put
+);
 
 export default router;

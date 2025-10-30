@@ -12,7 +12,7 @@ export const CreateRequestSchema = Joi.object({
 
 export const SearchRequestSchema = Joi.object({
   search: Joi.string().required(),
-  cursor: Joi.string().required(),
+  cursor: Joi.number().min(1).required(),
   limit: Joi.number().required(),
 });
 

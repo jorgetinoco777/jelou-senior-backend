@@ -4,14 +4,8 @@ import internalRoutes from "./internal.routes.js";
 
 const router = Router();
 
-router.use(
-  "/customers",
-  customersRoutes
-);
+router.use("/customers", customersRoutes);
 
-router.use(
-  "/internal",
-  internalRoutes
-);
+router.use("/internal", internalRoutes);
 
 export default router;

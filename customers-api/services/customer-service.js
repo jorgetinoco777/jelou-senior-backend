@@ -1,56 +1,93 @@
-import { BODY, PARAMS, QUERY } from "../enums/sources.js";
-import * as Schema from "../schemas/customer.js";
+import { BODY, PARAMS } from "../enums/sources.js";
+import {
+  CREATED,
+  FORBIDDEN,
+  INTERNAL_ERROR,
+  NO_CONTENT,
+  SUCCESS,
+} from "../enums/http-status.js";
 
-export const create = (source) => {
-  return (req, res, next) => {
-    const { name, email, phone } = req[source];
+// Entities
+import Customer from "../db/customers.db.js";
 
-    return res.status(200).json({
-      name,
-      email,
-      phone,
-      message: "Create customer success.",
+const create = (source) => (req, res, next) => {
+  const { name, email, phone } = req[source];
+
+  return Customer.findBy("email", email)
+    .then(async (data) => {
+      if (data) return res.status(FORBIDDEN).json();
+
+      const result = await Customer.insert(email, name, phone);
+
+      return res.status(CREATED).json({ id: result.insertId });
+    })
+    .catch((err) => {
+      return res.status(INTERNAL_ERROR);
     });
-  };
 };
 
-export const findById = (source) => {
-  return (req, res, next) => {
-    const { id } = req[source];
+const findBy = (source) => (req, res) => {
+  const { id } = req[source];
 
-    return res.status(200).json({
-      message: `Find customer: ${id}`,
+  Customer.findBy("id", id)
+    .then((data) => {
+      if (!data) return res.status(NO_CONTENT).json();
+
+      return res.status(SUCCESS).json({
+        ...data,
+      });
+    })
+    .catch((err) => {
+      return res.status(INTERNAL_ERROR);
     });
-  };
 };
 
-export const search = (source) => {
-  return (req, res, next) => {
-    const { search, cursor, limit } = req[source];
+const search = (source) => (req, res, next) => {
+  const { search, cursor, limit } = req[source];
 
-    return res.status(200).json({
-      message: `Customer search: ${search}, ${cursor}, ${limit}`,
+  return Customer.search(search, cursor, limit)
+    .then((result) => res.status(SUCCESS).json(result ? result : []))
+    .catch((err) => {
+      return res.status(INTERNAL_ERROR);
     });
-  };
 };
 
-export const deleteCutomer = (source) => {
-  return (req, res, next) => {
-    const { id } = req[source];
+const remove = (source) => (req, res, next) => {
+  const { id } = req[source];
 
-    return res.status(200).json({
-      message: `Delete customer: ${id}`,
+  return Customer.remove(id)
+    .then((data) => {
+      return res.status(SUCCESS).json({
+        id,
+        message: `Customer delete successfully.`,
+      });
+    })
+    .catch((err) => {
+      return res.status(INTERNAL_ERROR);
     });
-  };
 };
 
-export const put = (req, res, next) => {
+const put = (req, res, next) => {
   const { id } = req[PARAMS];
 
   const { name, phone } = req[BODY];
-  console.log("data: ", {name, phone});
 
-  return res.status(200).json({
-    message: `Customer id: ${id}`,
-  });
+  Customer.update(id, name, phone)
+    .then((data) =>
+      res.status(SUCCESS).json({
+        affectedRows: data.affectedRows,
+        info: data.info,
+      })
+    )
+    .catch((err) => {
+      return res.status(INTERNAL_ERROR);
+    });
+};
+
+export default {
+  create,
+  findBy,
+  search,
+  remove,
+  put,
 };
