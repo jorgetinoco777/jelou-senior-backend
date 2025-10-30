@@ -1,6 +1,6 @@
 import { Router } from "express";
-import CustomerService from "../services/customer-service.js";
-import { BODY, PARAMS, QUERY } from "../enums/sources.js";
+import CustomerService from "../services/customer.service.js";
+import { BODY, PARAMS, QUERY } from "../enums/sources.enum.js";
 import { validateSchema } from "../utils/validate.js";
 import {
   CreateRequestSchema,
@@ -8,7 +8,7 @@ import {
   FindIdRequestSchema,
   SearchRequestSchema,
   UpdateRequestSchema,
-} from "../schemas/customer.js";
+} from "../schemas/customer.schema.js";
 
 const router = Router();
 

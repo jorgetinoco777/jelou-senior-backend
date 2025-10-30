@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken";
-import { INVALID_TOKEN, UNAUTHORIZED } from "../enums/http-status.js";
+import { INVALID_TOKEN, UNAUTHORIZED } from "../enums/http-status.enum.js";
 
 const JWT_SECRET = process.env.JWT_SECRET || "secreto";
 const SERVICE_TOKEN = process.env.SERVICE_TOKEN || "token";

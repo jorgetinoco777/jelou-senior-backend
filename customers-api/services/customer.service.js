@@ -1,11 +1,11 @@
-import { BODY, PARAMS } from "../enums/sources.js";
+import { BODY, PARAMS } from "../enums/sources.enum.js";
 import {
   CREATED,
   FORBIDDEN,
   INTERNAL_ERROR,
   NO_CONTENT,
   SUCCESS,
-} from "../enums/http-status.js";
+} from "../enums/http-status.enum.js";
 
 // Entities
 import Customer from "../db/customers.db.js";

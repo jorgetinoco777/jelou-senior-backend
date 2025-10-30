@@ -1,4 +1,4 @@
-import { INTERNAL_ERROR } from "../enums/http-status.js";
+import { INTERNAL_ERROR } from "../enums/http-status.enum.js";
 import Auth from "../auth/index.js";
 
 const login = (req, res) => {

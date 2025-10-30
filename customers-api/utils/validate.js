@@ -1,4 +1,4 @@
-import { BAD_REQUEST } from "../enums/http-status.js";
+import { BAD_REQUEST } from "../enums/http-status.enum.js";
 
 export const validateSchema = (schema, source = 'body') => {
   return (req, res, next) => {
