@@ -1,9 +1,21 @@
 {
   "name": "orders-api",
   "version": "1.0.0",
-  "description": "",
+  "description": "Orders API",
+  "author": "Jorge Tinoco",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test! \" && exit 1",
+    "start": "node app.js"
+  },
   "dependencies": {
+    "cors": "^2.8.5",
     "express": "^4.19.2",
-    "serverless-http": "^3.2.0"
-  }
+    "joi": "^18.0.1",
+    "mysql2": "^3.15.3"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  },
+  "type": "module"
 }
