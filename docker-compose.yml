@@ -15,5 +15,37 @@ services:
       - ./db/schema.sql:/docker-entrypoint-initdb.d/1-schema.sql
       - ./db/seed.sql:/docker-entrypoint-initdb.d/2-seed.sql
 
+  customers-api:
+    build: ./customers-api
+    container_name: customers-api
+    restart: always
+    ports:
+      - "3001:3001"
+    environment:
+      - PORT=3001
+      - DB_HOST=mysql
+      - DB_USER=jelou
+      - DB_PASSWORD=jelou
+      - DB_NAME=jelou_db
+    depends_on:
+      - mysql
+    command: npm start
+
+  orders-api:
+    build: ./orders-api
+    container_name: orders-api
+    restart: always
+    ports:
+      - "3002:3002"
+    environment:
+      - PORT=3002
+      - DB_HOST=mysql
+      - DB_USER=jelou
+      - DB_PASSWORD=jelou
+      - DB_NAME=jelou_db
+    depends_on:
+      - mysql
+    command: npm start
+
 volumes:
   data:  
