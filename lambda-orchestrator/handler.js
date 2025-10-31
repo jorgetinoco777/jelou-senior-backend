@@ -80,19 +80,7 @@ app.post("/orchestrator/create-and-confirm-order", async (req, res, next) => {
       success: true,
       data: {
         customer,
-        order: {
-          id: 101,
-          status: "CONFIRMED",
-          total_cents: 459900,
-          items: [
-            {
-              product_id: 2,
-              qty: 3,
-              unit_price_cents: 129900,
-              subtotal_cents: 389700,
-            },
-          ],
-        },
+        order: { ...currentOrder },
       },
     });
   } catch (error) {

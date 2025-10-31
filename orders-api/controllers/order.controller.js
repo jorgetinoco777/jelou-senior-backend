@@ -2,6 +2,7 @@
 import Order from "../db/order.db.js";
 import OrderItem from "../db/order_item.db.js";
 import Product from "../db/product.db.js";
+import IdempotencyTable from "../db/idempotency.db.js";
 import { CREATED, INTERNAL_ERROR, SUCCESS } from "../enums/http-status.enum.js";
 import { BODY, PARAMS, QUERY } from "../enums/sources.enum.js";
 
@@ -24,6 +25,17 @@ const findById = async (req, res) => {
 const create = async (req, res, next) => {
   try {
     const { customer_id, items } = req[BODY];
+
+    const idempotency = req.header("x-idempotency-Key");
+
+    // 0. buscar idempotency
+    const transaction = await IdempotencyTable.findById(idempotency);
+
+    if (transaction)
+      return res.status(SUCCESS).json(JSON.parse(transaction.response_body));
+
+    // Create transaction (idempotency)
+    await IdempotencyTable.insert(idempotency, "CREATE ORDER", 1);
 
     let total_cents = 0;
     const products = [];
@@ -70,10 +82,21 @@ const create = async (req, res, next) => {
       await Product.update(product.id, undefined, product.stock);
     });
 
+    const response = {
+      id: orderId,
+      total: total_cents,
+      items: products_detail,
+    };
+
+    // Update idempotency
+    await IdempotencyTable.update(
+      idempotency,
+      "response_body",
+      JSON.stringify(response)
+    );
+
     // 6. build response
-    return res
-      .status(CREATED)
-      .json({ id: orderId, total: total_cents, items: products_detail });
+    return res.status(CREATED).json({ ...response });
   } catch (err) {
     return res.status(INTERNAL_ERROR).json({
       message: err,
