@@ -260,6 +260,23 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Health check",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/health",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"health"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -494,6 +511,23 @@
 									"key": "status",
 									"value": "PENDING"
 								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Health check",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{orders_api}}/health",
+							"host": [
+								"{{orders_api}}"
+							],
+							"path": [
+								"health"
 							]
 						}
 					},
