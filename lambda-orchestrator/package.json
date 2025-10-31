@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "description": "Lambda orchestrator",
   "scripts": {
-    "build": "echo \"no build step\"",
+    "build": "docker compose build",
     "dev": "serverless offline start --reloadHandler",
-    "start": "serverless deploy",
+    "start": "docker compose up --build",
     "lint": "echo \"no lint configured\""
   },
   "dependencies": {
