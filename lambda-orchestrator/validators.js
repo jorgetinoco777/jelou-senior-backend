@@ -1,4 +1,4 @@
-import Joi from "joi";
+const Joi = require("joi");
 
 export const ProductsOrderSchema = Joi.object({
   id: Joi.number().int().positive(),

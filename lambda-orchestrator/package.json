@@ -4,12 +4,13 @@
   "description": "Lambda orchestrator",
   "scripts": {
     "build": "echo \"no build step\"",
-    "dev": "serverless offline start",
+    "dev": "serverless offline start --reloadHandler",
     "start": "serverless deploy",
     "lint": "echo \"no lint configured\""
   },
   "dependencies": {
     "axios": "^1.13.1",
+    "body-parser": "^2.2.0",
     "dotenv": "^17.2.3",
     "express": "^4.19.2",
     "joi": "^18.0.1",

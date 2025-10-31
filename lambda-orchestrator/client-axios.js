@@ -1,13 +1,5 @@
-import axios from "axios";
+const axios = require("axios");
 
-/**
- * Crea una instancia de cliente HTTP basada en Axios.
- *
- * @param {string} baseURL - URL base del servicio externo.
- * @param {number} [timeout=10000] - Tiempo máximo de espera (ms).
- * @param {object} [extraHeaders={}] - Cabeceras adicionales por defecto.
- * @returns {import('axios').AxiosInstance} Cliente HTTP configurado.
- */
 export function createHttpClient(baseURL, timeout = 10000, extraHeaders = {}) {
   if (!baseURL) {
     throw new Error("createHttpClient: baseURL es obligatorio.");
@@ -23,9 +15,8 @@ export function createHttpClient(baseURL, timeout = 10000, extraHeaders = {}) {
     },
   });
 
-  // 📡 Interceptor de respuesta
   instance.interceptors.response.use(
-    (response) => response, // éxito
+    (response) => response,
     (error) => {
       const normalizedError = new Error(
         error.response?.data?.message || error.message || "Upstream error"
