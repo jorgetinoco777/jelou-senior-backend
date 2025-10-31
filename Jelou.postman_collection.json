@@ -330,7 +330,7 @@
 						"header": [
 							{
 								"key": "X-Idempotency-Key",
-								"value": "abc-3",
+								"value": "abc-4",
 								"type": "text"
 							}
 						],
@@ -593,13 +593,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{orders_api}}/products/1",
+							"raw": "{{orders_api}}/products/4",
 							"host": [
 								"{{orders_api}}"
 							],
 							"path": [
 								"products",
-								"1"
+								"4"
 							]
 						}
 					},
@@ -655,7 +655,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"customerId\": 2,\r\n    \"items\": [\r\n        {\r\n            \"product_id\": 4,\r\n            \"qty\": 3\r\n        }\r\n    ],\r\n    \"idempotency_key\": \"1\"\r\n}",
+					"raw": "{\r\n    \"customer_id\": 3,\r\n    \"items\": [\r\n        {\r\n            \"product_id\": 4,\r\n            \"qty\": 1\r\n        }\r\n    ],\r\n    \"idempotency_key\": \"yja-125-a3q\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"

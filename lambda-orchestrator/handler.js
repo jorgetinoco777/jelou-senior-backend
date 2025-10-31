@@ -44,9 +44,7 @@ app.post(
   "/orchestrator/create-and-confirm-order",
   validateSchema,
   async (req, res, next) => {
-    const { customer_id: customerId } = req.body;
-
-    OrchestratorSchema.validate(req.body);
+    const { customer_id: customerId, items, idempotency_key } = req.body;
 
     try {
       console.log("----- 1. Valid customer -----");
@@ -85,18 +83,14 @@ app.post(
       const { data: currentOrder } = await axios.post(
         `${ORDERS_API}/orders`,
         {
-          customer_id: 2,
-          items: [
-            {
-              product_id: 1,
-              qty: 10,
-            },
-          ],
+          customer_id: customerId,
+          items,
         },
         {
           headers: {
             Accept: "application/json",
             "Content-Type": "application/json",
+            "X-Idempotency-Key": idempotency_key
           },
         }
       );
