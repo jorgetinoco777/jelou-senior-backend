@@ -174,7 +174,14 @@ http://localhost:3002
 ### 🌐 URL Base
 
 ```
-https://localhost:3000
+https://localhost:4001
+```
+
+### 🧩 Run lambda
+From the `lambda-orquestrator` directory, run:
+
+```bash
+npm run dev
 ```
 
 ### 📦 Principal endpoint
@@ -192,27 +199,46 @@ Resume:
 ## 💬 Example
 
 ```bash
-curl -X POST https://localhost:3000/orchestrator/create-and-confirm-order   -H "Content-Type: application/json"   -d '{
-    "customer_id": 1,
-    "idempotency_key": "1234567890",
-    "correlation_id": "1233567890",
+curl -X POST https://localhost:3000/orchestrator/create-and-confirm-order
+-H "Content-Type: application/json"
+-d '{
+    "customer_id": 3,
     "items": [
-      { "product_id": 1, "qty": 1 },
-      { "product_id": 2, "qty": 1 }
-    ]
-  }'
+        {
+            "product_id": 5,
+            "qty": 2
+        }
+    ],
+    "idempotency_key": "yja-126-a3q"
+}'
 ```
 
 ---
 
-**Success response (201 Created):**
+**Success response (200):**
 
 ```json
 {
-  "correlationId": "XXXXX-12345",
-  "data": {
-    "customer": { ... },
-    "order": { "message": "Order successfully confirmed", "orderId": 112122 }
-  }
+    "success": true,
+    "data": {
+        "customer": {
+            "id": 3,
+            "email": "carlos.herrera@example.com",
+            "name": "Carlos Herrera",
+            "phone": "+593912345678"
+        },
+        "order": {
+            "id": 55,
+            "total": 498,
+            "items": [
+                {
+                    "id": 5,
+                    "qty": 2,
+                    "unit_price": 249,
+                    "subtotal": 498
+                }
+            ]
+        }
+    }
 }
 ```
