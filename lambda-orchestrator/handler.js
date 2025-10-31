@@ -55,6 +55,26 @@ app.post("/orchestrator/create-and-confirm-order", async (req, res, next) => {
     console.log("Customer: ", customer);
 
     console.log("----- 2. Create order -----");
+    const { data: currentOrder } = await axios.post(
+      `${ORDERS_API}/orders`,
+      {
+        customer_id: 2,
+        items: [
+          {
+            product_id: 1,
+            qty: 10,
+          },
+        ],
+      },
+      {
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    console.log("Order: ", currentOrder);
 
     return res.status(200).json({
       success: true,

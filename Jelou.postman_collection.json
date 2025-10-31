@@ -312,7 +312,188 @@
 		},
 		{
 			"name": "Orders",
-			"item": []
+			"item": [
+				{
+					"name": "Create order",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"customer_id\": 2,\r\n  \"items\": [\r\n    {\r\n        \"product_id\": 1,\r\n        \"qty\": 1\r\n    }, \r\n    {\r\n        \"product_id\": 2,\r\n        \"qty\": 2\r\n    }\r\n  ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{orders_api}}/orders",
+							"host": [
+								"{{orders_api}}"
+							],
+							"path": [
+								"orders"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Cancel order",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"customer_id\": 2,\r\n  \"total_cents\": 1200,\r\n  \"products\": [\r\n    {\r\n        \"product_id\": 1,\r\n        \"qty\": 10,\r\n        \"unit_price_cents\": 100,\r\n        \"subtotal_cents\": 100\r\n    }\r\n  ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{orders_api}}/orders/1/cancel",
+							"host": [
+								"{{orders_api}}"
+							],
+							"path": [
+								"orders",
+								"1",
+								"cancel"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Find order by id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{orders_api}}/orders/1",
+							"host": [
+								"{{orders_api}}"
+							],
+							"path": [
+								"orders",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Confirm order",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{orders_api}}/orders/1/confirm",
+							"host": [
+								"{{orders_api}}"
+							],
+							"path": [
+								"orders",
+								"1",
+								"confirm"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search order",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{orders_api}}/orders?from=1&to=10&cursor=1&limit=2&status=PENDING",
+							"host": [
+								"{{orders_api}}"
+							],
+							"path": [
+								"orders"
+							],
+							"query": [
+								{
+									"key": "from",
+									"value": "1"
+								},
+								{
+									"key": "to",
+									"value": "10"
+								},
+								{
+									"key": "cursor",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "2"
+								},
+								{
+									"key": "status",
+									"value": "PENDING"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		},
 		{
 			"name": "Products",
@@ -352,8 +533,143 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Update product",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"price_cents\": 100,\r\n  \"stock\":       1000\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{orders_api}}/products/16",
+							"host": [
+								"{{orders_api}}"
+							],
+							"path": [
+								"products",
+								"16"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Find product by id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{orders_api}}/products/1",
+							"host": [
+								"{{orders_api}}"
+							],
+							"path": [
+								"products",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search product",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{orders_api}}/products?search=gen&cursor=1&limit=2",
+							"host": [
+								"{{orders_api}}"
+							],
+							"path": [
+								"products"
+							],
+							"query": [
+								{
+									"key": "search",
+									"value": "gen"
+								},
+								{
+									"key": "cursor",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
 				}
 			]
+		},
+		{
+			"name": "Lambda orchestrator",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"customerId\": 2,\r\n    \"items\": [\r\n        { \"product_id\": 2, \"qty\": 3 }\r\n    ],\r\n    \"idempotency_key\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4001/orchestrator/create-and-confirm-order",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4001",
+					"path": [
+						"orchestrator",
+						"create-and-confirm-order"
+					]
+				}
+			},
+			"response": []
 		}
 	],
 	"event": [
